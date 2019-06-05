@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h3>Todos</h3>
-        <div class="bg-success text-white p-2 m-1 w-25 d-inline-block" v-for="todo in allTodos" :key="todo.id">
+        <div class="bg-success text-white p-2 m-1 d-inline-block" v-for="todo in allTodos" :key="todo.id">
             {{ todo.title }}
         </div>
     </div>
@@ -12,8 +12,8 @@ import {mapGetters, mapActions} from 'vuex'
 
 export default {
     name: "Todos",
-    computed: mapGetters(['allTodos']),
-    methods: {
+    computed: {
+        ...mapGetters(['allTodos']),
         ...mapActions(['fetchTodos'])
     }
 }
