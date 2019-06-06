@@ -1,9 +1,8 @@
 <template>
     <div>
-        <h3>Add Todo</h3> 
         <div class="container">
             <div class="form-group">
-                <input type="text" class="form-control-sm border" v-model="title">
+                <input type="text" class="form-control-sm border" v-model="title" @keyup.enter="onSubmit">
                 <button type="submit" class="btn-sm btn-success border" @click.prevent="onSubmit">Submit</button>
             </div>
         </div>
@@ -23,6 +22,7 @@ export default {
         onSubmit(){
             console.log('on submit')
             this.addTodo(this.title)
+            this.title=''
         }
     }
 }
