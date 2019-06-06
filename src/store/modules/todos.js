@@ -41,13 +41,25 @@ const actions = {
         const res = await Axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`)
         
         commit('setTodos', res.data)    
+    },
+
+    async updateTodo({ commit }, updTodo) {
+        await Axios.put(`https://jsonplaceholder.typicode.com/todos/${updTodo.id}`)
+
+        commit('updTodo', updTodo)
     }
 }
 
 const mutations = {
     setTodos: (state, todos) => (state.todos = todos),
     newTodo: (state, todo) => (state.todos.unshift(todo)),
-    removeTodo: (state, id) => (state.todos = state.todos.filter(t => (t.id !== id)))
+    removeTodo: (state, id) => (state.todos = state.todos.filter(t => (t.id !== id))),
+    updTodo: (state, updTodo) => {
+        const index = state.todos.findIndex(todo => todo.id === updTodo.id)
+        if(index !== -1) {
+            state.todos.splice(index, 1, updTodo)
+        }
+    }
 }
 
 export default {
